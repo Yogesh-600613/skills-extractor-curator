@@ -15,7 +15,7 @@ CONTEXT
 
 We have two existing extraction skills:
 
-1. team-knowledge-extractor
+1. session-knowledge-extractor
    Extracts engineering knowledge from complete
    historical GitHub Copilot conversations and code.
 

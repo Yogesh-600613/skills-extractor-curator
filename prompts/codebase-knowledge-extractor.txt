@@ -11,7 +11,7 @@ Its purpose is to extract reusable engineering knowledge
 from actual repositories WITHOUT requiring AI chat history.
 
 IMPORTANT
-An existing team-knowledge-extractor and a
+An existing session-knowledge-extractor and a
 canonical knowledge-report contract are located at:
 
 knowledge-contract/v1/

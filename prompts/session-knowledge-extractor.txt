@@ -1,0 +1,496 @@
+Act as a Principal Software Architect, AI Agent Engineer,
+Knowledge Management Architect, and GitHub Copilot
+Skills Designer.
+
+TASK
+Build a production-quality, reusable GitHub Copilot
+Agent Skill named "session-knowledge-extractor".
+
+Create it under:
+.github/skills/session-knowledge-extractor/
+
+This skill will extract engineering knowledge from
+historical GitHub Copilot development sessions,
+including sessions that span multiple repositories
+and technologies.
+
+It must work with the available GitHub Copilot
+environments in VS Code and IntelliJ.
+
+CONTEXT
+The extraction process must support engineering
+projects involving Spring Boot, Terraform, Azure
+Databricks, Python packages, Azure integrations,
+CI/CD pipelines, and other technology stacks.
+
+Historical sessions may contain architectural
+decisions, implementation corrections, and lessons
+that are not captured in current source code.
+
+The goal is to convert supported findings into
+verified, reusable engineering procedures and
+eventually into shared Agent Skills.
+
+The developer experience must be extremely simple:
+invoke one skill, wait for analysis, review a concise
+report, and approve sharing if appropriate.
+
+Do not require developers to learn SQL tools, agent
+orchestration, evidence schemas, or multiple prompts.
+
+SECTION A — SESSION HISTORY EXTRACTION
+
+1. Use the native session_store_sql tool where
+   available to retrieve historical session turns.
+
+2. Discover the actual available tool interface.
+   Do not invent SQL schemas, tool names, fields,
+   table structures, or unsupported functionality.
+
+3. Retrieve the complete accessible conversation,
+   including user prompts and Copilot responses.
+
+4. Support long sessions through batched retrieval.
+   Track session identity, turn identifiers,
+   retrieval boundaries, coverage, and gaps.
+
+5. Preserve the chronology of:
+   - Initial vague requirements
+   - Requirement clarifications
+   - Alternative designs considered
+   - Architecture decisions and rationale
+   - Implementation steps
+   - Developer and architect corrections
+   - Failed implementations and debugging
+   - Changes to libraries or frameworks
+   - Testing and Sonar remediation
+   - Security and authentication decisions
+   - Deployment and operational issues
+   - Final decisions and outstanding problems
+
+6. Do not rely only on compacted chat summaries.
+   Use historical turns as evidence.
+
+7. If a portion of history is inaccessible,
+   explicitly report the gap. Never claim complete
+   retrieval without verifying available coverage.
+
+8. Support sessions involving multiple repositories.
+   Map each significant finding to the correct
+   application, repository, module, and revision.
+
+SECTION B — SOURCE CODE VERIFICATION
+
+Inspect relevant repositories, source code, Git
+history, documentation, tests, dependencies,
+configuration, and CI/CD definitions.
+
+Use other repositories as read-only references.
+
+Correlate conversation claims against actual code.
+
+Distinguish:
+- What someone requested
+- What Copilot proposed
+- What was actually implemented
+- What was later changed
+- What is currently present
+- What was tested
+- What remains unverified
+
+Never assume that the final conversational answer
+represents the final implementation.
+
+Never assume the most recent implementation is
+automatically the best engineering practice.
+
+SECTION C — ENGINEERING KNOWLEDGE PRIORITIES
+
+Investigate all relevant technologies dynamically,
+without assuming the session is Java-only.
+
+Give special attention to:
+
+1. SHARED AND CENTRAL LIBRARIES
+   Identify internal library coordinates, versions,
+   version-management sources, interfaces, methods,
+   configuration, dependency injection, and usage.
+
+   Reconstruct exactly HOW libraries are used,
+   not merely whether they are imported.
+
+   Identify approved examples and alternatives.
+   Do not infer approval merely from usage frequency.
+
+2. AUTHENTICATION AND AUTHORIZATION
+   Reconstruct actual authentication sequences:
+   credential source, approved library, secret
+   retrieval, token generation, token caching,
+   expiry, downstream invocation, errors, security
+   context, and validation where applicable.
+
+   Capture call ordering and exact library APIs
+   using source references, without exposing secrets.
+
+   Distinguish service-to-service authentication,
+   interactive authentication, and other patterns.
+
+3. EXCEPTION HANDLING
+   Identify shared exception libraries, exception
+   hierarchies, propagation, translation, API error
+   mapping, retry decisions, logging, and recovery.
+
+   Distinguish technical failures from business
+   failures and retryable from non-retryable cases.
+
+4. SONAR AND CODE QUALITY
+   Extract quality gates, rules, actual remediation
+   techniques, security findings, code-smell fixes,
+   and behavioral-regression safeguards.
+
+5. TESTING AND COVERAGE
+   Identify JUnit, Mockito, JaCoCo, Sonar, pytest,
+   notebook tests, Terraform checks, and other
+   applicable verification mechanisms.
+
+   Investigate applicable coverage targets, including
+   90% thresholds where specified or enforced.
+
+   Determine the actual enforced coverage metric:
+   line, branch, instruction, overall, or new-code.
+
+   Record measured coverage, configured thresholds,
+   exclusions, test reports, and their evidence.
+
+   Never equate a stated 90% target with verified
+   achievement. Unknown must remain unknown.
+
+   Prefer meaningful behavioral testing over tests
+   written only to increase coverage percentages.
+
+6. ARCHITECTURE AND INTEGRATION
+   Capture design patterns, data flows, interfaces,
+   external APIs, storage, security boundaries,
+   configuration, resilience, and dependencies.
+
+7. AZURE, TERRAFORM, AND DATABRICKS
+   When applicable, capture central Terraform
+   modules, state management, CI/CD, Azure services,
+   notebook orchestration, Python wheel packaging,
+   jobs, data transformations, and operational rules.
+
+8. HISTORICAL ENGINEERING LESSONS
+   Recover errors, corrections, regressions,
+   architectural pivots, rejected alternatives,
+   temporary workarounds, and proven resolutions.
+
+SECTION D — CRITICAL DEVIATION POLICY
+
+A deviation from a common or centrally recommended
+pattern must NEVER automatically be called wrong.
+
+Investigate:
+- What established baseline was being departed from
+- Why the alternative was selected
+- Whether the shared library lacked required features
+- Whether legacy compatibility required the change
+- Whether an incident or defect motivated it
+- Whether security or performance justified it
+- Whether approval or an exception exists
+- Whether compensating controls were implemented
+- Whether the solution was temporary or permanent
+- Whether the alternative subsequently became preferred
+
+Classify deviations as:
+- Approved exception
+- Justified alternative, approval unverified
+- Unexplained variation
+- Potential improvement
+- Confirmed noncompliance
+- Known defect
+- Historical workaround
+- Superseded design
+
+Use "confirmed noncompliance" only when an
+authoritative requirement and contrary behavior
+are both supported by evidence.
+
+Preserve valuable alternative implementations.
+They may reveal gaps in our central libraries.
+
+Never silently normalize differences.
+
+SECTION E — PARALLEL ANALYSIS
+
+Use native #useSubAgents / available subagent
+delegation for substantial, independent analysis.
+
+Suggested specialists:
+
+Agent 1: Architecture and integration patterns
+Agent 2: Shared libraries, authentication, exception
+         handling, code quality, testing, and CI/CD
+Agent 3: Historical decisions, failures, corrections,
+         deviations, and reusable lessons
+
+Provide each subagent with the relevant extracted
+evidence and repository references explicitly.
+
+Do not assume subagents inherit full chat history.
+
+Require evidence-backed output, separate reports,
+and independent conclusions.
+
+The parent agent consolidates findings, resolves
+duplicates, and reports genuine contradictions.
+
+If delegation is unavailable, perform the analysis
+sequentially and disclose that limitation.
+
+Never claim subagents ran unless they actually did.
+
+SECTION F — CANONICAL KNOWLEDGE REPORT CONTRACT
+
+The shared, versioned contract already exists at:
+
+knowledge-contract/v1/
+
+Inspect and reuse it unchanged as the source of truth.
+Do not generate a competing format or overwrite it.
+If it is missing, stop and report the missing dependency.
+
+Both this skill and the future
+codebase-knowledge-extractor MUST use this exact
+contract, including field names, allowed values,
+filenames, and classification rules.
+
+Verify it contains:
+- report-specification.md
+- findings-schema.json
+- report-templates/
+- evidence-policy.md
+- approval-policy.md
+
+The schema must support both session-based and
+codebase-only evidence without requiring fake
+session identifiers.
+
+Every extraction produces:
+
+reports/<source-id>/
+    manifest.json
+    summary.md
+    findings.json
+    evidence-index.md
+    review.md
+
+REPORT 1: manifest.json
+Include:
+- Schema version
+- Report identifier
+- Extraction type: session or codebase
+- Analysis date
+- Source session IDs when available
+- Repository identifiers and Git revisions
+- Technologies discovered
+- History or source coverage
+- Missing/inaccessible evidence
+- Actual tools and subagents used
+- Validation status
+- Sharing/review status
+
+REPORT 2: summary.md
+Create a concise, architect-readable report with
+the following exact numbered sections:
+
+1. Executive Summary
+2. Application / Project Profile
+3. Architecture and Execution Flow
+4. Shared Libraries and Central Dependencies
+5. Authentication and Security
+6. Exception Handling and Resilience
+7. SonarQube and Code Quality
+8. Testing and Coverage
+9. CI/CD, Packaging, Infrastructure and Operations
+10. Historical Decisions and Architectural Evolution
+11. Deviations, Exceptions and Alternatives
+12. Known Defects, Risks and Technical Debt
+13. Golden Implementation Candidates
+14. Reusable Skills and Standards Candidates
+15. Open Questions and Required Architect Decisions
+16. Evidence Coverage and Approval Status
+
+Keep it readable, with an executive summary,
+tables where useful, and references to finding IDs.
+
+REPORT 3: findings.json
+Create structured, machine-readable finding records.
+
+Every finding must include:
+- finding_id
+- title
+- category
+- technologies
+- project/repository/module
+- observed_pattern
+- implementation_steps
+- shared_libraries_and_versions
+- authentication_or_integration_sequence
+- baseline_or_expected_pattern
+- deviations_and_justifications
+- alternatives_and_tradeoffs
+- historical_evolution
+- evidence_references
+- verification_status
+- confidence
+- normative_status
+- reuse_scope
+- known_risks
+- test_and_validation_evidence
+- coverage_metric_and_result_if_applicable
+- golden_reference_candidate
+- recommendation
+- candidate_skill_name
+- approval_status
+- open_questions
+
+Use typed JSON fields, null for unknown values,
+and empty arrays for genuinely absent collections.
+
+Use the existing enumerations and required/optional
+field semantics in findings-schema.json.
+
+Do not use an empty field to imply successful
+verification.
+
+Make evidence references machine-linkable through
+stable IDs into evidence-index.md.
+
+REPORT 4: evidence-index.md
+Provide traceable references to:
+- Session IDs and turn IDs/ranges
+- Source paths and line ranges
+- Git commits and relevant diffs
+- Test cases and results
+- Build/quality reports
+- Documentation and authoritative standards
+
+Separate direct evidence from interpretation.
+
+Record the revision at which code was inspected.
+Never invent source lines or commit IDs.
+
+REPORT 5: review.md
+Create a short approval checklist listing:
+- Major findings needing confirmation
+- Proposed team-standard candidates
+- Justified deviations and unresolved exceptions
+- Sensitive findings requiring redaction
+- Known defects
+- What may be shared internally
+
+All findings begin as pending review.
+Never self-approve architectural standards.
+
+SECTION G — FINDING CLASSIFICATION
+
+Keep these independent dimensions separate:
+
+Evidence confidence:
+verified / corroborated / inferred / unknown
+
+Normative status:
+approved-standard / observed-practice /
+approved-exception / candidate /
+confirmed-noncompliance / known-defect /
+historical-only / unresolved
+
+Reuse scope:
+team-wide / technology-specific /
+project-specific / not-recommended
+
+Recommendation:
+create-skill / update-skill / merge-skill /
+keep-existing / retire-skill / permanent-instruction /
+reference-document / automated-check /
+no-action / needs-review
+
+Approval:
+pending / approved / rejected /
+approved-with-conditions
+
+A code occurrence is not policy approval.
+A passing build is not sufficient proof of
+runtime correctness.
+A missing Sonar report is UNKNOWN, not failed.
+
+SECTION H — SECURITY AND USER EXPERIENCE
+
+One invocation should perform the entire
+extraction automatically.
+
+Do not ask the developer multiple setup questions.
+Ask only when an essential scope or permission
+decision cannot be safely inferred.
+
+Use only tools permitted in the execution environment.
+Do not install external utilities or plugins.
+
+Keep complete raw session histories restricted
+to the session owner's approved environment.
+
+Do not publish or commit raw transcripts.
+Do not expose credentials, tokens, employee data,
+private URLs, or sensitive document contents.
+
+Create reports in a designated local output
+directory. Exclude them from version control
+unless explicitly approved.
+
+Allow the developer to review and approve
+sanitized findings before team-wide sharing.
+
+Read-only against applications, repositories,
+Git history and source systems.
+No deployments, infrastructure mutations,
+production queries, or application code changes.
+
+DOCUMENTATION STYLE AND PORTABILITY
+
+Use clear, neutral professional engineering language in
+all generated skills, templates, and shared documentation.
+Do not introduce employer names, project counts,
+personal identities, proprietary application examples,
+or unverified organizational policies. Only use specific
+technical identifiers when grounded in authorized source
+evidence and necessary for controlled internal reports.
+Do not copy sensitive repository evidence into portable
+skill definitions or example templates.
+
+SECTION I — DELIVERABLES
+
+Generate the complete Agent Skill:
+SKILL.md plus supporting references and templates.
+
+Ensure:
+- Valid Agent Skills YAML frontmatter
+- Correct name and description
+- Clear activation conditions
+- Step-by-step execution workflow
+- Progressive loading of supporting references
+- Explicit linkage to the canonical report contract
+- No reliance on this bootstrap conversation
+- IntelliJ and VS Code compatibility
+
+Validate the JSON schema, skill structure,
+report templates, and referenced file paths
+using available approved tooling.
+
+Do not run a real extraction yet.
+
+Finally report:
+1. Files created
+2. How the skill operates
+3. Its canonical report contract
+4. Any limitations
+5. A one-line invocation for developers
