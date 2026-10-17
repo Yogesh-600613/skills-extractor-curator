@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0.0",
+  "report_id": "EXAMPLE-CODEBASE",
+  "findings": [
+    {
+      "finding_id": "FND-001",
+      "title": "Shared client initialization pattern (illustrative)",
+      "category": "shared-libraries",
+      "technologies": [
+        "Java",
+        "Spring Boot"
+      ],
+      "project": "sample-project",
+      "repository": "sample-repository",
+      "module": "service",
+      "observed_pattern": "A shared client is initialized through a dedicated configuration component.",
+      "implementation_steps": [
+        "Load client configuration using approved application settings.",
+        "Initialize the shared client through the wrapper.",
+        "Inject the client into the dependent service."
+      ],
+      "shared_libraries_and_versions": [
+        {
+          "name": "<internal-client-library-placeholder>",
+          "version": null,
+          "version_source": null,
+          "key_apis": [
+            "<client factory placeholder>"
+          ],
+          "usage_notes": "Library identity and version require source verification."
+        }
+      ],
+      "authentication_or_integration_sequence": [],
+      "baseline_or_expected_pattern": null,
+      "baseline_authority": null,
+      "deviation_classification": "unknown",
+      "deviations_and_justifications": [],
+      "alternatives_and_tradeoffs": [],
+      "historical_evolution": [],
+      "evidence_references": [
+        "EVD-001"
+      ],
+      "verification_status": "unverified",
+      "confidence": "inferred",
+      "normative_status": "observed-practice",
+      "reuse_scope": "technology-specific",
+      "known_risks": [
+        "The example is fictional and must not be used as policy evidence."
+      ],
+      "test_and_validation_evidence": [],
+      "coverage_metric_and_result_if_applicable": null,
+      "golden_reference_candidate": null,
+      "recommendation": "needs-review",
+      "candidate_skill_name": null,
+      "approval_status": "pending",
+      "open_questions": [
+        "Is the shared wrapper the expected implementation for this context?"
+      ]
+    }
+  ]
+}

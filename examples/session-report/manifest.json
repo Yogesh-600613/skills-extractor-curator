@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "report_id": "EXAMPLE-SESSION",
+  "source_type": "session",
+  "analysis_date": "2000-01-01",
+  "session_ids": [
+    "example-session-001"
+  ],
+  "repositories": [
+    {
+      "repository": "sample-repository",
+      "revision": null,
+      "scope": "illustrative"
+    }
+  ],
+  "technologies": [
+    "Java",
+    "Spring Boot"
+  ],
+  "coverage": {
+    "status": "unknown",
+    "description": "Fictional example, no actual source inspected",
+    "known_gaps": [
+      "All fields are placeholders; not evidence of a real codebase"
+    ],
+    "turns_retrieved": null,
+    "turns_expected": null
+  },
+  "tools_used": [],
+  "subagents_used": [],
+  "validation_status": "not-run",
+  "sharing_status": "restricted",
+  "approval_status": "pending",
+  "report_notes": null
+}

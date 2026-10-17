@@ -1,0 +1,629 @@
+Act as a Principal Enterprise Software Architect,
+Engineering Standards Lead, AI Agent Orchestration
+Architect, and GitHub Copilot Skills Engineer.
+
+TASK
+Create a production-quality reusable Agent Skill named
+"team-skills-curator" under:
+
+.github/skills/team-skills-curator/
+
+This is the central analysis and governance layer
+for reusable engineering skills.
+
+CONTEXT
+
+We have two existing extraction skills:
+
+1. team-knowledge-extractor
+   Extracts engineering knowledge from complete
+   historical GitHub Copilot conversations and code.
+
+2. codebase-knowledge-extractor
+   Extracts knowledge directly from existing
+   applications without requiring AI session history.
+
+Both use the same versioned contract:
+
+knowledge-contract/v1/
+
+Inspect the actual existing skills and report contract
+before implementing the curator.
+
+Do not redefine or duplicate the reporting schema.
+
+GOAL
+
+Incrementally build and maintain a high-quality,
+evidence-backed engineering skills library covering
+Java, Spring Boot, Terraform, Azure, Databricks,
+CI/CD, and other enterprise development work.
+
+Engineering priorities include:
+- Correct use of centrally maintained libraries
+- Standardized authentication implementations
+- Standardized exception handling
+- SonarQube compliance and quality gates
+- At least 90% test coverage where required
+- Reliable unit and integration testing
+- Consistent architecture and integration patterns
+- Secure configuration and credential handling
+- CI/CD, deployment, observability and reliability
+- Preservation of valid architectural exceptions
+
+The curator must prevent duplication, preserve
+historical knowledge, and avoid converting
+unverified assumptions into team standards.
+
+SECTION A — DISCOVER AND VALIDATE INPUTS
+
+Discover available engineering knowledge reports
+produced by both extraction skills.
+
+Verify their schema version and completeness.
+
+Read:
+- manifest.json
+- summary.md
+- findings.json
+- evidence-index.md
+- review.md
+
+Accept both session-based and codebase-based reports
+without treating one source type as inherently superior.
+
+Track:
+- Repository and application identity
+- Analyzed Git revision
+- Technology stack and framework versions
+- Evidence coverage
+- Verification status
+- Review and approval status
+- Report version
+- Unresolved questions
+
+Prefer architect-approved findings for standardization.
+
+Pending findings may inform proposed investigations,
+but must not be published as approved standards.
+
+Reject malformed reports for automated consolidation
+and report validation errors clearly.
+
+Do not silently drop incomplete or conflicting findings.
+
+Do not require raw historical transcripts to be
+copied into the central skills repository.
+
+SECTION B — CROSS-PROJECT KNOWLEDGE ANALYSIS
+
+Identify common implementation patterns across
+all available approved reports.
+
+Investigate:
+
+1. Shared libraries and approved dependencies
+2. Authentication and token-handling sequences
+3. Exception handling, propagation and retries
+4. SonarQube rules and remediation strategies
+5. JUnit, Mockito, JaCoCo and coverage practices
+6. Configuration and secret management
+7. Service-to-service integration patterns
+8. Architecture and design conventions
+9. Azure infrastructure and Terraform practices
+10. Azure Databricks notebooks and Python packages
+11. CI/CD, Maven, GitLab, Nexus and deployments
+12. Observability, debugging and reliability
+13. Historical corrections and engineering lessons
+
+Group related patterns into coherent engineering
+capabilities, not arbitrary collections of files.
+
+Identify whether multiple implementations use
+the same library in the same way.
+
+For authentication, compare actual call sequences,
+configuration, token lifecycles, and error handling.
+
+For exception handling, compare exact exception
+types, translation rules and recovery behavior.
+
+For code quality, distinguish documented team rules
+from actual SonarQube enforcement.
+
+For test coverage, compare like-for-like metrics.
+Do not compare line coverage against branch coverage
+as though they represent the same measure.
+
+SECTION C — DEVIATIONS ARE NOT AUTOMATIC DEFECTS
+
+This is a mandatory architectural principle.
+
+A deviation from a common implementation is NOT
+automatically bad, incorrect or noncompliant.
+
+Before recommending standardization, examine:
+
+- The original engineering requirement
+- The relevant central standard, if one exists
+- The actual differences
+- The reason for the alternative
+- Constraints at implementation time
+- Shared library limitations
+- Backward compatibility requirements
+- Security, operational or performance needs
+- Production incidents or historical defects
+- Approval evidence
+- Compensating controls
+- Test and production evidence
+- Current applicability
+
+Treat these as distinct outcomes:
+
+APPROVED EXCEPTION
+A formally authorized alternative implementation.
+
+JUSTIFIED ALTERNATIVE
+Evidence supports its use, but approval is
+unknown or still needs confirmation.
+
+UNEXPLAINED VARIATION
+Different implementation with insufficient
+evidence to classify as correct or incorrect.
+
+POTENTIAL IMPROVEMENT
+An alternative that may improve the shared
+standard or central library.
+
+CONFIRMED NONCOMPLIANCE
+Both an authoritative standard and a violation
+are established by evidence.
+
+KNOWN DEFECT
+An independently established implementation
+problem.
+
+HISTORICAL WORKAROUND
+A context-dependent solution that should not
+automatically become a general pattern.
+
+Never infer that the majority approach is correct
+simply because it appears in more repositories.
+
+Never penalize justified architectural exceptions.
+
+Where multiple legitimate patterns exist,
+preserve their applicability conditions and
+decision criteria.
+
+Architectural disagreements requiring judgment
+must be escalated for architect review.
+
+SECTION D — GOLDEN REFERENCE IMPLEMENTATIONS
+
+Identify the strongest candidates for approved
+reference implementations.
+
+A golden reference should demonstrate:
+- Correct shared library usage
+- Compliance with relevant architectural standards
+- Clear, maintainable implementation
+- Appropriate exception handling
+- Security and authentication correctness
+- Relevant test coverage and test quality
+- Production suitability where established
+- Documented limitations and applicability
+- Approval from responsible architects
+
+Distinguish candidate references from approved ones.
+
+Maintain a catalog of golden implementations.
+
+Reference:
+- Repository
+- Module
+- Class/function
+- Relevant methods
+- Framework and library versions
+- Commit or revision
+- Required configuration
+- Applicability boundaries
+- Approval owner and status
+
+Do not copy proprietary code unnecessarily into
+skills. Prefer linking to approved internal references.
+
+A future Copilot agent should be able to understand
+exactly which implementation to study and why.
+
+SECTION E — PARALLEL CURATION
+
+Use native #useSubAgents for independent,
+substantial analysis where supported.
+
+Suggested subagents:
+
+Agent 1 — Standards Analyst
+Identify repeated patterns, central libraries,
+authentication standards, exception conventions,
+and architect-approved practices.
+
+Agent 2 — Technology Specialist
+Identify reusable Java, Terraform, Databricks,
+Azure, CI/CD, testing and integration workflows.
+
+Agent 3 — Independent Challenger
+Find contradictions, unjustified assumptions,
+hidden limitations, regressions, anti-patterns,
+and valid alternative implementations.
+
+Agent 4 — Skills Quality Reviewer
+Evaluate existing skills, duplication, scope,
+activation triggers, maintenance requirements,
+and portability.
+
+Give each agent relevant evidence and scope.
+Do not assume shared context is inherited.
+
+The parent agent consolidates their reports.
+
+Never resolve real architectural disputes merely
+through model majority voting.
+
+If specialist conclusions conflict, present the
+evidence and flag a human decision.
+
+SECTION F — EXISTING SKILLS INVENTORY
+
+Before recommending or generating anything,
+inventory the current team skills repository.
+
+For every existing skill identify:
+- Name and description
+- Purpose and activation trigger
+- Applicability and technology
+- Supporting evidence
+- Dependencies and references
+- Current version
+- Maintainer and approval status
+- Validation status
+- Known limitations
+- Overlap with other skills
+
+Each new candidate must receive one disposition:
+
+CREATE
+New procedure with sufficient value and evidence.
+
+UPDATE
+Improve an existing skill with new verified knowledge.
+
+MERGE
+Combine overlapping skills with compatible purposes.
+
+KEEP
+Existing skill remains appropriate.
+
+RETIRE
+Remove or deprecate an obsolete or misleading skill
+through an approved change process.
+
+NEEDS REVIEW
+Insufficient evidence or unresolved architectural
+disagreement prevents standardization.
+
+Do not continuously generate nearly identical skills.
+
+SECTION G — SEPARATE KNOWLEDGE TYPES
+
+Determine whether each finding should become:
+
+A. AGENT SKILL
+Repeatable task-oriented procedure with activation
+conditions, inputs, steps, validation and outputs.
+
+B. PERMANENT COPILOT INSTRUCTION
+A broadly applicable engineering convention,
+restriction or requirement.
+
+C. REFERENCE DOCUMENT
+Detailed architecture, implementation examples,
+library usage, historical decisions and explanations.
+
+D. AUTOMATED CHECK
+A deterministic rule better enforced through tests,
+Sonar, CI, static analysis or build validation.
+
+E. APPLICATION-SPECIFIC KNOWLEDGE
+Business rules or configuration that should remain
+within the owning application.
+
+F. ARCHITECTURAL REVIEW ITEM
+Unresolved decisions, inconsistent standards or
+potential improvements needing team approval.
+
+Do not generate an Agent Skill for something that
+would be better implemented as a deterministic check.
+
+Do not hardcode individual application's business
+rules into global engineering skills.
+
+SECTION H — SKILL PRIORITIZATION
+
+Rank proposed skills using:
+- Reusability across applications
+- Engineering impact
+- Reliability of supporting evidence
+- Relevance to team standards
+- Frequency of future use
+- Risk reduction
+- Developer time savings
+- Ease of validation
+- Maintenance burden
+- Potential overlap with existing skills
+
+Provide an explainable score or tier and rationale.
+
+Recurring evidence from multiple repositories
+should increase confidence when comparable.
+
+However, one excellent and approved implementation
+may justify a valuable skill if its procedure is
+clearly reusable.
+
+Do not make a minimum repository count an
+absolute requirement for every skill.
+
+SECTION I — HUMAN REVIEW AND APPROVAL
+
+Operate by default in PROPOSAL mode.
+
+Produce a prioritized catalog with:
+- Candidate skill name
+- Engineering problem
+- Applicability and activation conditions
+- Supporting reports and finding IDs
+- Proposed canonical reference implementations
+- Required libraries and conventions
+- Valid exceptions and alternatives
+- Risks and unresolved questions
+- Recommended CREATE/UPDATE/MERGE/KEEP/RETIRE
+- Validation strategy
+- Approval status
+
+Do not modify existing approved skills or
+generate new ones without explicit approval.
+
+Present a concise decision summary for the
+team's skill maintainer and architects.
+
+Allow approval of individual candidates or
+small batches instead of requiring approval
+for the entire catalog.
+
+Never auto-approve your own recommendations.
+
+SECTION J — INCREMENTAL SKILL GENERATION
+
+After approval, generate no more than 2–3
+new or updated engineering skills per batch
+unless the user explicitly requests otherwise.
+
+Each skill must follow the Agent Skills standard:
+
+.github/skills/<skill-name>/SKILL.md
+
+Include:
+- Valid name and description in YAML frontmatter
+- Precise activation conditions
+- Applicable technologies and prerequisites
+- Input discovery and preparation
+- Step-by-step procedure
+- Approved libraries and reference usage
+- Exact implementation sequences where relevant
+- Supported alternatives and exceptions
+- Failure handling and safeguards
+- Expected outputs
+- Testing and verification steps
+- Evidence references and applicability limits
+
+Keep SKILL.md focused.
+Use supporting references for detailed material.
+
+Skills must work without access to the original
+historical development conversations.
+
+Do not embed secrets, customer information,
+internal credentials or sensitive raw logs.
+
+Do not introduce unverified practices as standards.
+
+SECTION K — INDEPENDENT SKILL VALIDATION
+
+Every generated or modified skill must be evaluated
+before being recommended for team adoption.
+
+Use independent reviewer subagents where helpful.
+
+Validation must include:
+
+1. SKILL.md structural and frontmatter validation
+2. Broken reference checks
+3. Compatibility with the canonical standards
+4. No contradiction with existing approved skills
+5. Correctness of library usage and examples
+6. Accurate exception and alternative handling
+7. Security and deployment safeguards
+8. Applicability to more than one scenario
+9. A realistic fresh-session test case
+10. A negative test or edge case
+
+For example:
+- Can an unfamiliar Java agent reproduce an approved
+  authentication pattern without inventing methods?
+- Can it preserve standardized exception handling?
+- Can it identify the correct Sonar/coverage checks?
+- Can a Terraform agent find the central module first?
+- Can a Databricks agent understand notebook and
+  Python wheel boundaries?
+- Can it recognize a justified exception without
+  automatically replacing it?
+
+Where practical, compare a baseline task without
+the skill to the same task with the skill.
+
+Record expected behavior, observed behavior,
+limitations and unresolved evaluation results.
+
+Do not claim successful evaluation if the test
+was not actually executed.
+
+SECTION L — PERSISTENT CATALOG AND GOVERNANCE
+
+Create and maintain a version-controlled catalog.
+
+It should record:
+- Skill name and stable identifier
+- Description and activation scope
+- Current version
+- Status: proposed / approved / deprecated / retired
+- Technology and applicability
+- Supporting finding IDs and approved reports
+- Golden implementation references
+- Maintainer and approval owner
+- Last review date
+- Validation scenarios and results
+- Dependencies and related skills
+- Known exceptions and limitations
+- Change history
+
+Maintain a human-readable catalog and a
+machine-readable index.
+
+Track new evidence against existing skills.
+
+When a new knowledge report arrives, determine
+whether it provides:
+- A new skill opportunity
+- Evidence strengthening an existing skill
+- A needed correction
+- A valid exception
+- A new alternative
+- A reason to deprecate obsolete guidance
+
+Support incremental updates without rebuilding
+the entire library from scratch.
+
+Preserve existing approved versions until changes
+are reviewed and accepted.
+
+SECTION M — STANDARDS COMPLIANCE VISIBILITY
+
+Provide an optional cross-application matrix covering:
+- Shared library usage
+- Authentication patterns
+- Exception handling patterns
+- Sonar quality-gate status
+- Coverage target and actual measured result
+- Central configuration and security conventions
+- Approved exceptions
+- Unknown or incomplete evidence
+
+Use classifications such as:
+- Verified compliant
+- Approved alternative
+- Justified variation pending review
+- Confirmed deviation requiring remediation
+- Unknown / not assessed
+
+Never present a missing report as proof of failure.
+
+Never treat 90% as universally measured by the
+same metric without checking the applicable policy.
+
+Never label a valid approved exception as deficient.
+
+The matrix should be used for engineering insight,
+not automatic ranking of individual developers.
+
+SECTION N — SECURITY AND SHARING
+
+Operate entirely within the development tools and
+repositories authorized for the execution environment.
+
+Use authorized internal version-controlled repositories
+for skills and reviewed knowledge artifacts.
+
+Never publish raw private Copilot transcripts.
+
+Only consume and share appropriately approved
+knowledge reports.
+
+Do not copy secrets, tokens, sensitive employee
+information or confidential operational data
+into reusable skills.
+
+Do not modify application code or execute
+production deployments.
+
+Respect repository ownership and architect
+approval boundaries.
+
+Keep unreviewed findings separate from approved
+engineering standards.
+
+DOCUMENTATION STYLE AND PORTABILITY
+
+Use clear, neutral professional engineering language in
+all generated skills, templates, and shared documentation.
+Do not introduce employer names, project counts,
+personal identities, proprietary application examples,
+or unverified organizational policies. Only use specific
+technical identifiers when grounded in authorized source
+evidence and necessary for controlled internal reports.
+Do not copy sensitive repository evidence into portable
+skill definitions or example templates.
+
+SECTION O — DELIVERABLES
+
+Create the complete curator skill:
+
+.github/skills/team-skills-curator/SKILL.md
+
+Add supporting references for:
+- Input report validation
+- Cross-project comparison
+- Standards and deviations
+- Golden reference selection
+- Skill prioritization
+- Skill generation
+- Independent evaluation
+- Versioning and governance
+
+Create an initial empty/seeded catalog structure,
+without inventing engineering standards.
+
+Reference the existing knowledge-contract/v1/.
+
+Ensure the curator understands the SAME data
+produced by both extraction skills.
+
+Validate:
+- SKILL.md structure
+- Report schema compatibility
+- All internal references
+- Proposal and approval gates
+- Incremental update procedures
+- Skill generation and evaluation workflow
+
+Do NOT run the curator against real reports yet.
+Do NOT generate actual engineering skills yet.
+Do NOT modify application code.
+
+Finally report:
+1. Files created
+2. Catalog structure
+3. Curator operating modes
+4. Approval workflow
+5. Validation performed
+6. A one-line invocation for the skills maintainer

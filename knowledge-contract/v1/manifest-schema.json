@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:engineering-knowledge:manifest:1.0.0",
+  "title": "Engineering Knowledge Report Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "report_id",
+    "source_type",
+    "analysis_date",
+    "session_ids",
+    "repositories",
+    "technologies",
+    "coverage",
+    "tools_used",
+    "subagents_used",
+    "validation_status",
+    "sharing_status",
+    "approval_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "report_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_type": {
+      "enum": [
+        "session",
+        "codebase"
+      ]
+    },
+    "analysis_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "session_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "repositories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "repository",
+          "revision"
+        ],
+        "properties": {
+          "repository": {
+            "type": "string"
+          },
+          "revision": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "scope": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "technologies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "description",
+        "known_gaps"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "complete-as-accessible",
+            "partial",
+            "unknown"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "known_gaps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "turns_retrieved": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "turns_expected": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "tools_used": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "subagents_used": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "validation_status": {
+      "enum": [
+        "not-run",
+        "schema-valid",
+        "needs-review",
+        "failed"
+      ]
+    },
+    "sharing_status": {
+      "enum": [
+        "restricted",
+        "approved-for-internal-sharing"
+      ]
+    },
+    "approval_status": {
+      "enum": [
+        "pending",
+        "approved",
+        "rejected",
+        "approved-with-conditions"
+      ]
+    },
+    "report_notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

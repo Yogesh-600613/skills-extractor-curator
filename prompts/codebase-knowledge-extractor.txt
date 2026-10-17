@@ -1,0 +1,450 @@
+Act as a Principal Software Architect, Enterprise
+Codebase Analyst, and GitHub Copilot Skills Engineer.
+
+TASK
+Create a production-quality, reusable Agent Skill named
+"codebase-knowledge-extractor" under:
+
+.github/skills/codebase-knowledge-extractor/
+
+Its purpose is to extract reusable engineering knowledge
+from actual repositories WITHOUT requiring AI chat history.
+
+IMPORTANT
+An existing team-knowledge-extractor and a
+canonical knowledge-report contract are located at:
+
+knowledge-contract/v1/
+
+Inspect these existing files first.
+
+You MUST reuse the exact same report schema,
+classification rules, evidence structure, report
+filenames, and approval process.
+
+Do NOT create a competing report format.
+Do NOT duplicate or silently change the shared schema.
+
+Both extraction skills must produce interchangeable
+reports consumable by one team-skills-curator.
+
+CONTEXT
+The extractor must support repositories containing
+Spring Boot applications, Azure infrastructure,
+Terraform modules, Azure Databricks notebooks,
+Python packages, CI/CD pipelines, and other stacks.
+
+Development conversation history may be unavailable,
+regardless of whether code was authored manually or
+with development assistance.
+
+The implementation itself is the primary evidence.
+
+Developers should be able to invoke this skill once,
+without understanding internal agent orchestration.
+
+SECTION A — AUTOMATIC REPOSITORY DISCOVERY
+
+On invocation:
+
+1. Identify the intended repository or project
+   from the currently selected workspace context.
+
+2. Discover its technology stack automatically.
+
+3. Detect multiple modules, applications, packages,
+   infrastructure components, and linked repositories.
+
+4. Separate the main application from centrally
+   maintained library or reference repositories.
+
+5. Identify application entry points, execution paths,
+   dependencies, configuration and build systems.
+
+6. Inspect repository history and existing documentation
+   where available.
+
+7. Record the exact repository revision analyzed.
+
+8. Avoid assuming every workspace folder belongs
+   to the same application.
+
+9. Treat external reference repositories as read-only.
+
+10. If scope is truly ambiguous, ask one concise
+    question; otherwise proceed automatically.
+
+SECTION B — ARCHITECTURE RECONSTRUCTION
+
+Reconstruct how the application actually works.
+
+Investigate:
+- Business purpose and application responsibilities
+- Modules and component boundaries
+- Controllers, services, repositories and workers
+- Batch jobs, schedulers and event-driven processing
+- Input/output flows and external dependencies
+- API contracts and downstream systems
+- Persistence, transactions and data movement
+- Configuration and environment differences
+- Dependency injection and abstraction boundaries
+- Authentication and authorization
+- Exception handling, retries and recovery
+- Logging, metrics and observability
+- Performance, concurrency and scalability
+- Packaging and deployment architecture
+- Tests, build checks and quality gates
+
+Produce an evidence-backed execution-flow description.
+
+Do not invent business requirements, architectural
+rationale, or historical decisions from code alone.
+
+Distinguish directly observed behavior from inferred
+intent and unresolved questions.
+
+SECTION C — TECHNOLOGY-SPECIFIC DEEP ANALYSIS
+
+Adapt dynamically to the discovered technologies.
+
+JAVA / SPRING BOOT
+
+Investigate:
+- Java and Spring Boot versions
+- Internal Maven dependencies and BOMs
+- Parent POMs and centrally maintained libraries
+- Controller/service/repository conventions
+- REST clients and downstream integrations
+- Security configuration and authentication flows
+- Token management and credential retrieval
+- Exception classes and translation patterns
+- Central logging and observability libraries
+- Validation, DTOs and serialization
+- Scheduling, async execution and concurrency
+- JUnit 5, Mockito, JaCoCo and SonarQube
+- API compatibility and backwards compatibility
+- Existing reference implementations
+
+Extract exact API usage and implementation sequences,
+not superficial dependency inventories.
+
+AZURE DATABRICKS / PYTHON
+
+Investigate:
+- Source notebooks and notebook dependencies
+- Notebook orchestration and execution order
+- Workflow jobs and task dependencies
+- Python packages and wheel build definitions
+- Actual wheel entry points and imported functions
+- Shared utilities and reusable Python modules
+- Data sources, transformations and destinations
+- Spark and Delta Lake implementation patterns
+- Schema evolution and data validation
+- Partitioning, caching and performance practices
+- Job parameters and environment configuration
+- Identity, secrets and authentication
+- Retry, checkpoint and recovery patterns
+- Error handling and logging
+- Testing and deployment procedures
+- Databricks Asset Bundles if present
+- GitLab pipelines and artifact publication
+
+Prefer Python package source over compiled wheel files.
+Inspect built artifacts only when necessary and
+permitted by available approved tools.
+
+Identify workspace-only notebooks, jobs or resources
+that are not represented in the checked-out repository.
+
+Never invent their implementation.
+
+TERRAFORM / AZURE INFRASTRUCTURE
+
+Investigate:
+- Centrally maintained Terraform modules
+- Pinned module sources and versions
+- Variables, outputs and dependencies
+- Resource naming and tagging
+- Environment-specific configuration
+- Remote state and backend separation
+- Existing-resource discovery and import practices
+- Packaging or assembly descriptors
+- GitLab pipelines, Maven and Nexus where present
+- Validation and plan-review procedures
+- Security and infrastructure safeguards
+
+Do not initialize against production backends,
+modify state, or apply infrastructure.
+
+OTHER TECHNOLOGIES
+
+Apply the same engineering-analysis principles
+to whatever stack is actually present.
+
+Do not exclude unfamiliar applications merely
+because they are not Java or Databricks.
+
+SECTION D — TEAM ENGINEERING STANDARDS DISCOVERY
+
+Give highest priority to identifying:
+
+1. Shared libraries and centrally managed components
+2. EXACT authentication implementation flows
+3. Standardized exception handling
+4. SonarQube and code-quality conventions
+5. Testing practices and 90% coverage requirements
+6. Central configuration and secret management
+7. Observability and logging conventions
+8. Security, resilience and operational practices
+9. CI/CD and deployment procedures
+10. Reusable architectural and integration patterns
+
+For each shared library, record:
+- Library identity and version source
+- Where it is used
+- Important classes and methods
+- Configuration/initialization sequence
+- Authentication or request flow where relevant
+- Exception and failure handling
+- Test evidence
+- Alternative implementations
+
+Identify golden reference candidates, but never
+self-declare an implementation approved or canonical.
+
+For code coverage, distinguish configured targets
+from actual reports and test results.
+
+If the organization targets 90%, determine whether
+the applicable policy measures line coverage,
+branch coverage, coverage on new code, or other metrics.
+
+Report unknown when measurement is unavailable.
+Never fabricate successful Sonar checks.
+
+SECTION E — DEVIATIONS AND EXCEPTIONS
+
+A different implementation is NOT automatically wrong.
+
+Before identifying any deviation as a problem:
+
+1. Establish whether an authoritative baseline exists.
+2. Identify the exact observed difference.
+3. Search documentation and Git history for rationale.
+4. Determine whether the alternative solves a
+   limitation, compatibility problem, security issue,
+   performance constraint, or production incident.
+5. Identify compensating safeguards.
+6. Examine evidence that the alternative works.
+7. Determine whether it is approved, tolerated,
+   experimental, or unresolved.
+8. Preserve valuable alternatives for architect review.
+
+Never label a difference as noncompliance merely
+because most other projects use another approach.
+
+Never treat commonly repeated code as proof
+of an approved standard.
+
+Never automatically recommend replacing custom
+implementations with central libraries without
+checking functional compatibility.
+
+A deviation may reveal a valuable improvement
+that should be proposed to the central library team.
+
+SECTION F — GIT HISTORY AND ENGINEERING EVOLUTION
+
+Investigate meaningful Git commits, branches,
+diffs and available change documentation.
+
+Identify:
+- Important architectural refactorings
+- Dependency and library replacements
+- Authentication implementation changes
+- Sonar remediations
+- Test coverage improvements
+- Incident and defect fixes
+- Regressions and corrections
+- Changes in deployment patterns
+- Removed or replaced approaches
+
+Do not claim to know why a change occurred
+unless commit messages, documents, tests or other
+accessible evidence support that explanation.
+
+If the reason is unclear, record an architectural
+question for the developer or architect.
+
+If Git history is shallow or unavailable,
+report the limitation.
+
+SECTION G — PARALLEL ANALYSIS
+
+Use native #useSubAgents where supported
+for substantial independent investigations.
+
+Suggested agents:
+
+1. Architecture and execution-flow analysis
+2. Shared libraries, authentication, exceptions,
+   quality standards and testing
+3. CI/CD, infrastructure, operations and reliability
+4. Git history, deviations, alternatives and risks
+
+Adapt the number of agents to repository size.
+
+Complete initial repository discovery before
+delegating so each agent receives relevant scope,
+paths and evidence.
+
+Subagents must work read-only and return
+separate evidence-backed findings.
+
+Consolidate findings centrally, resolving duplicates
+and highlighting real disagreements.
+
+Do not pretend delegation occurred if unavailable.
+
+SECTION H — IDENTICAL REPORT CONTRACT
+
+Use the EXISTING knowledge-contract/v1/ unchanged.
+
+Generate the EXACT SAME files as the session extractor:
+
+reports/<source-id>/
+    manifest.json
+    summary.md
+    findings.json
+    evidence-index.md
+    review.md
+
+The summary.md must contain the same 16 sections,
+with identical headings and order.
+
+The findings.json must validate against the same
+findings-schema.json.
+
+Include exactly the same classification dimensions:
+evidence confidence, normative status, reuse scope,
+recommendation and approval status.
+
+For codebase-only findings:
+- Session references remain empty or null.
+- Code, Git, tests and documentation provide evidence.
+- Unavailable historical decisions remain unknown.
+- Do not create fake session turns.
+
+Preserve exact library usage, authentication sequences,
+exception conventions, test results and deviations.
+
+Every finding must have a stable finding ID,
+traceable evidence and a review status.
+
+Do not invent data just to populate mandatory fields.
+Use schema-defined null/unknown values.
+
+SECTION I — CANDIDATE SKILL DISCOVERY
+
+Propose reusable skills based on repeatable,
+demonstrable engineering procedures.
+
+Distinguish:
+- Team-wide reusable workflows
+- Technology-specific procedures
+- Application-specific implementation rules
+- Permanent Copilot instructions
+- Reference documentation
+- Automated quality checks
+
+A good candidate skill must explain:
+- When it should activate
+- What problem it solves
+- Required inputs and prerequisites
+- Step-by-step engineering procedure
+- Approved libraries or references
+- Supported exceptions and alternatives
+- Error handling and safeguards
+- Testing and validation
+- Expected outputs
+- Applicability and limitations
+
+Do not create final engineering skills during
+knowledge extraction.
+
+Only propose candidates for team review.
+
+SECTION J — USER EXPERIENCE AND SAFETY
+
+Invocation should require one simple instruction,
+such as:
+
+"Analyze this application for reusable team knowledge."
+
+The skill should automatically discover the code,
+perform analysis and create its report.
+
+Ask only essential questions when evidence or scope
+cannot be determined safely.
+
+No third-party tools or plugins.
+
+Use only Copilot, IDE, Git and local development
+capabilities permitted in the execution environment.
+
+Do not modify source code, configurations,
+GitLab pipelines or infrastructure.
+
+Do not execute deployments or production jobs.
+
+Avoid accessing production data or credentials.
+
+Create only approved local analysis artifacts.
+
+Do not automatically publish reports.
+
+Require developer or architect review before sharing.
+
+DOCUMENTATION STYLE AND PORTABILITY
+
+Use clear, neutral professional engineering language in
+all generated skills, templates, and shared documentation.
+Do not introduce employer names, project counts,
+personal identities, proprietary application examples,
+or unverified organizational policies. Only use specific
+technical identifiers when grounded in authorized source
+evidence and necessary for controlled internal reports.
+Do not copy sensitive repository evidence into portable
+skill definitions or example templates.
+
+SECTION K — DELIVERABLES
+
+Create:
+.github/skills/codebase-knowledge-extractor/SKILL.md
+
+Add supporting references only where necessary:
+- Stack-discovery procedure
+- Architecture investigation
+- Technology-specific checklists
+- Evidence verification
+- Parallel analysis
+- Report generation and validation
+
+Reference the existing canonical reporting contract.
+Do not duplicate it.
+
+Ensure this skill can operate independently of
+the session extractor at runtime.
+
+Validate:
+- SKILL.md frontmatter
+- Names and activation descriptions
+- Supporting reference paths
+- Canonical schema compatibility
+- Expected report outputs
+- Approval and security safeguards
+
+Do not run an actual codebase extraction yet.
+
+Report files created, structure validation,
+limitations, and a one-line invocation.

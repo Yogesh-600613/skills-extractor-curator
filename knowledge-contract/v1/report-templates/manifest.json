@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "report_id": "REPORT-REPLACE-ME",
+  "source_type": "codebase",
+  "analysis_date": "2000-01-01",
+  "session_ids": [],
+  "repositories": [],
+  "technologies": [],
+  "coverage": {
+    "status": "unknown",
+    "description": "Not assessed yet",
+    "known_gaps": [],
+    "turns_retrieved": null,
+    "turns_expected": null
+  },
+  "tools_used": [],
+  "subagents_used": [],
+  "validation_status": "not-run",
+  "sharing_status": "restricted",
+  "approval_status": "pending",
+  "report_notes": null
+}
